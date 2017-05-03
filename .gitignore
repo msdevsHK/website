@@ -1,5 +1,5 @@
-MSDevsHK.Website/bin
-MSDevsHK.Website/obj
+**/bin
+**/obj
 MSDevsHK.Website/wwwroot/lib
 MSDevsHK.Website/wwwroot/**/*.css.map
 MSDevsHK.Website/wwwroot/**/*.min.css

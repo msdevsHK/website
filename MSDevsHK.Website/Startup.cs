@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using AspNet.Security.OAuth.Meetup;
 
 namespace MSDevsHK.Website
 {
@@ -52,6 +53,11 @@ namespace MSDevsHK.Website
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseMeetupAuthentication(options => {
+                options.ClientId = ""; //TODO
+                options.ClientSecret = ""; //TODO
+            });
 
             app.UseStaticFiles();
 

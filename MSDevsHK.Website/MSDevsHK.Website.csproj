@@ -1,7 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
-  </PropertyGroup>
+  </PropertyGroup>Ï
+
+  <ItemGroup>
+    <ProjectReference Include="..\AspNet.Security.OAuth.Meetup\AspNet.Security.OAuth.Meetup.csproj" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.0.2" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
