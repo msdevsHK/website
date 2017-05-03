@@ -27,6 +27,12 @@ namespace MSDevsHK.Website
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Adds services required for using options.
+            services.AddOptions();
+            
+            // Register the IConfiguration instance which options binds against.
+            services.Configure<MSDevsHK.Website.Data.DocumentDB.DocumentDBDataRepositoryOptions>(Configuration);
+
             // Add framework services.
             services.AddMvc();
         }
