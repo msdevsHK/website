@@ -1,3 +1,7 @@
 source/bin
 source/obj
-project.lock.json
+source/wwwroot/lib
+source/wwwroot/**/*.css.map
+source/wwwroot/**/*.min.css
+source/wwwroot/**/*.min.css.map
+source/wwwroot/**/*.min.js
