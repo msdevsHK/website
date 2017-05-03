@@ -1,7 +1,7 @@
-source/bin
-source/obj
-source/wwwroot/lib
-source/wwwroot/**/*.css.map
-source/wwwroot/**/*.min.css
-source/wwwroot/**/*.min.css.map
-source/wwwroot/**/*.min.js
+MSDevsHK.Website/bin
+MSDevsHK.Website/obj
+MSDevsHK.Website/wwwroot/lib
+MSDevsHK.Website/wwwroot/**/*.css.map
+MSDevsHK.Website/wwwroot/**/*.min.css
+MSDevsHK.Website/wwwroot/**/*.min.css.map
+MSDevsHK.Website/wwwroot/**/*.min.js
