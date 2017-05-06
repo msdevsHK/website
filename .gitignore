@@ -1,5 +1,7 @@
 **/bin
 **/obj
+MSDevsHK.Website/certs/cert.crt
+MSDevsHK.Website/certs/cert.pfx
 MSDevsHK.Website/wwwroot/lib
 MSDevsHK.Website/wwwroot/**/*.css.map
 MSDevsHK.Website/wwwroot/**/*.min.css

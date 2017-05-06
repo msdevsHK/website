@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AspNet.Security.OAuth.Meetup;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace MSDevsHK.Website
 {
@@ -20,6 +21,7 @@ namespace MSDevsHK.Website
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
@@ -30,7 +32,12 @@ namespace MSDevsHK.Website
         {
             // Adds services required for using options.
             services.AddOptions();
-            
+
+            services.AddAuthentication(options =>
+            {
+                options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
+
             // Register the IConfiguration instance which options binds against.
             services.Configure<MSDevsHK.Website.Data.DocumentDB.DocumentDBDataRepositoryOptions>(Configuration);
 
@@ -42,10 +49,10 @@ namespace MSDevsHK.Website
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {
+                loggerFactory.AddDebug();
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
             }
@@ -54,9 +61,19 @@ namespace MSDevsHK.Website
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseMeetupAuthentication(options => {
-                options.ClientId = ""; //TODO
-                options.ClientSecret = ""; //TODO
+            // TODO
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                //LoginPath = new PathString("/signin"),
+                //LogoutPath = new PathString("/signout")
+            });
+
+            app.UseMeetupAuthentication(options =>
+            {
+                options.ClientId = "clientid"; // TODO
+                options.ClientSecret = "secret"; // TODO
             });
 
             app.UseStaticFiles();
