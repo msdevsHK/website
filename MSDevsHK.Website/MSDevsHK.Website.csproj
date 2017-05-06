@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
-  </PropertyGroup>Ï
+  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AspNet.Security.OAuth.Meetup\AspNet.Security.OAuth.Meetup.csproj" />
