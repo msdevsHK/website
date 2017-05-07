@@ -1,6 +1,6 @@
 using System;
 
-namespace MSDevsHK
+namespace MSDevsHK.Website
 {
     /// <summary>
     /// Hosting related application configuration.
@@ -23,5 +23,4 @@ namespace MSDevsHK
         /// </summary>
         public string HttpsPfxPassword { get; set; }
     }
-
 }
