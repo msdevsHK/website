@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using MSDevsHK.Website.Data.DocumentDB;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace MSDevsHK.Website
 {
@@ -25,7 +26,8 @@ namespace MSDevsHK.Website
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
+                .AddEnvironmentVariables()
+                .AddUserSecrets<Startup>();
 
             Configuration = builder.Build();
         }
@@ -37,12 +39,6 @@ namespace MSDevsHK.Website
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.Configure<RewriteOptions>(options =>
-            {
-
-            });
-
             // The application uses cookies to handle sessions to know whether users are authorized to access the app.
             // Authentication challenges happen via the Meetup middleware.
             services.AddAuthentication(options =>
@@ -84,11 +80,18 @@ namespace MSDevsHK.Website
             rewriteOptions.AddRedirectToHttps(308, Environment.IsDevelopment() ? Program.DevHttpsPort : 443);
             app.UseRewriter(rewriteOptions);
 
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                LoginPath = new PathString("/sign-on"),
+                LogoutPath = new PathString("/sign-off")
+            });
+
             // Use meetup for the authentication challenge, and handle the session with a cookie.
             app.UseMeetupAuthentication((MeetupAuthenticationOptions options) =>
             {
-                options.AutomaticAuthenticate = true;
-                options.AutomaticChallenge = true;
+                options.CallbackPath = new PathString("/sign-on-meetup");
                 options.ClientId = Configuration.GetValue("OAuth:Meetup:ClientId", "undefined-client-id");
                 options.ClientSecret = Configuration.GetValue("OAuth:Meetup:ClientSecret", "undefined-client-secret");
             });
