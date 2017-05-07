@@ -1,31 +1,29 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\AspNet.Security.OAuth.Meetup\AspNet.Security.OAuth.Meetup.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="6.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="1.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.2.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
-  </ItemGroup>
-
   <PropertyGroup>
     <UserSecretsId>msdevshk-website-1</UserSecretsId>
   </PropertyGroup>
-
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0" />
+    <ProjectReference Include="..\AspNet.Security.OAuth.Meetup\AspNet.Security.OAuth.Meetup.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.0.2"/>
+    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2"/>
+    <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="1.0.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="1.1.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1"/>
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.2.2"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="1.1.1"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1"/>
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0"/>
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0"/>
   </ItemGroup>
 </Project>

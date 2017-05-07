@@ -12,6 +12,7 @@ Also recommended are the following extensions:
  - C# `ms-vscode.csharp`
  - C# Extensions `jchannon.csharpextensions`
  - C# XML Documentation Comments `k--kato.docomment`
+ - NuGet Package Manager `jmrog.vscode-nuget-package-manager`
 
 Other editors will work as well, but you'll miss out on the neat `.vscode` setup to easily start and debug the website.
 

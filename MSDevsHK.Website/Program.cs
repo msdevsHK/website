@@ -11,6 +11,16 @@ namespace MSDevsHK.Website
 {
     public class Program
     {
+        /// <summary>
+        /// The port to bind to for HTTP connections in the Development environment.
+        /// </summary>
+        public const int DevHttpPort = 8000;
+
+        /// <summary>
+        /// The port to bind to for HTTPS connections in the Development environment.
+        /// </summary>
+        public const int DevHttpsPort = 44300;
+
         public static void Main(string[] args)
         {
             // Determine whether we run under the development environment, to load specific host setup.
@@ -21,9 +31,9 @@ namespace MSDevsHK.Website
 
             var config = new ConfigurationBuilder()
                 .SetBasePath(cwd)
-                .AddUserSecrets<Program>()
                 .AddJsonFile("appsettings.json", optional: true)
                 .AddJsonFile($"appsettings.{env}.json", optional: true)
+                .AddUserSecrets<Program>()
                 .Build();
 
             var hostConfig = config.GetSection("Host").Get<HostConfig>();
@@ -52,8 +62,8 @@ namespace MSDevsHK.Website
                 // Note that the below URLs do not bind the server to the default ports HTTP 80 and HTTPS 443 because
                 // that would require administrative permissions on most OS'es.
                 hostBuilder.UseUrls(
-                    $"http://{hostConfig.Hostname}:8000",
-                    $"https://{hostConfig.Hostname}:44300");
+                    $"http://{hostConfig.Hostname}:{DevHttpPort}",
+                    $"https://{hostConfig.Hostname}:{DevHttpsPort}");
             }
             else
             {
