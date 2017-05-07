@@ -1,0 +1,5 @@
+# Deployment configuration file for Kudu in Azure App Services.
+
+[config]
+# Select the website project as there are also other csproj files in the repo.
+project = MSDevsHK.Website
