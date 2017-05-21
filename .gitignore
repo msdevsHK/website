@@ -1,5 +1,7 @@
 **/bin
 **/obj
+*.userprefs
+*.csproj.user
 MSDevsHK.Website/certs/cert.crt
 MSDevsHK.Website/certs/cert.pfx
 MSDevsHK.Website/wwwroot/lib

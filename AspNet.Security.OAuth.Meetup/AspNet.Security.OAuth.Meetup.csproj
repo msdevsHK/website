@@ -3,7 +3,7 @@
   <!--<Import Project="..\..\build\packages.props" />-->
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.3</TargetFrameworks>
+    <TargetFramework>netstandard1.3</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
