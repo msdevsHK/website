@@ -17,19 +17,24 @@ namespace MSDevsHK.Website.Controllers
     /// </remarks>
     public class AuthenticationController : Controller
     {
-        [HttpGet("~/sign-on"), HttpPost("~/sign-on")]
-        public IActionResult SignOn()
+        [HttpGet("~/login"), HttpPost("~/login")]
+        public IActionResult Login()
         {
             // Instruct the middleware corresponding to the requested external identity
             // provider to redirect the user agent to its own authorization endpoint.
             // Note: the authenticationScheme parameter must match the value configured in Startup.cs
             return Challenge(
-                new AuthenticationProperties { RedirectUri = "/" },
+                new AuthenticationProperties
+                {
+                    RedirectUri = "/",
+                    // Make the cookie persistent across browser sessions.
+                    IsPersistent = true
+                },
                 MeetupAuthenticationDefaults.AuthenticationScheme);
         }
 
-        [HttpGet("~/sign-off"), HttpPost("~/sign-off")]
-        public IActionResult SignOff()
+        [HttpGet("~/logout"), HttpPost("~/logout")]
+        public IActionResult Logout()
         {
             // Instruct the cookies middleware to delete the local cookie created
             // when the user agent is redirected from the external identity provider

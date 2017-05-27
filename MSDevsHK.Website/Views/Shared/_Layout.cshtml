@@ -46,15 +46,15 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#">Profile</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a asp-area="" asp-controller="Authentication" asp-action="SignOff">Sign-off</a></li>
+                                <li><a asp-area="" asp-controller="Authentication" asp-action="Logout">Log out</a></li>
                             </ul>
                         </li>
                     }
                     else
                     {
-                        <li><a asp-area="" asp-controller="Authentication" asp-action="SignOn">
+                        <li><a asp-area="" asp-controller="Authentication" asp-action="Login">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                            Sign-on with Meetup
+                            Log in with Meetup
                         </a></li>
                     }
                 </ul>

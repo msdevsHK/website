@@ -13,6 +13,7 @@ using MSDevsHK.Website.Data.DocumentDB;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using MSDevsHK.Website.Services;
 
 namespace MSDevsHK.Website
 {
@@ -80,20 +81,32 @@ namespace MSDevsHK.Website
             rewriteOptions.AddRedirectToHttps(308, Environment.IsDevelopment() ? Program.DevHttpsPort : 443);
             app.UseRewriter(rewriteOptions);
 
+            // Handle app authorization with cookies, which are populated with the principal from Meetup authentication.
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
-                LoginPath = new PathString("/sign-on"),
-                LogoutPath = new PathString("/sign-off")
+                // Use a short cookie name, that stands for AuthoriZation.
+                CookieName = "AuthZ",
+                // When persistent, store for 1 year. Persistency set upon login challenge.
+                ExpireTimeSpan = TimeSpan.FromDays(365),
+                LoginPath = new PathString("/login"),
+                LogoutPath = new PathString("/logout"),
+                Events = new CookieAuthenticationEvents {
+                    // Perform custom validation of the principal upon authentication. This checks that the user has a
+                    // valid Meetup access token.
+                    OnValidatePrincipal = AuthManager.ValidatePrincipal
+                }
             });
 
             // Use meetup for the authentication challenge, and handle the session with a cookie.
             app.UseMeetupAuthentication((MeetupAuthenticationOptions options) =>
             {
-                options.CallbackPath = new PathString("/sign-on-meetup");
+                options.CallbackPath = new PathString("/login-meetup");
                 options.ClientId = Configuration.GetValue("OAuth:Meetup:ClientId", "undefined-client-id");
                 options.ClientSecret = Configuration.GetValue("OAuth:Meetup:ClientSecret", "undefined-client-secret");
+                // Save the auth tokens for use in the custom principal validator on the cookie authentication.
+                options.SaveTokens = true;
             });
 
             app.UseStaticFiles();
