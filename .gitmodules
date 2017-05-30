@@ -1,0 +1,4 @@
+[submodule "bgever/Security"]
+	path = bgever/Security
+	url = https://github.com/bgever/Security.git
+	branch = bgever/submodule-test
